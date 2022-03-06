@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models/Item.dart';
-// @dart=2.9
+
 void main() {
   runApp(const MyApp());
 }
@@ -49,8 +49,6 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatefulWidget {
   var items = new List<Item>();
-
-
 
   HomePage(){
     items = [];
@@ -121,7 +119,7 @@ class _HomePageState extends State<HomePage> {
 
 
   }
-  Future save() async {
+  save() async {
     var prefs = await SharedPreferences.getInstance();
     await prefs.setString('data', jsonEncode(widget.items));
   }
@@ -153,7 +151,7 @@ class _HomePageState extends State<HomePage> {
         itemCount: widget.items.length,
         itemBuilder: (ctxt,index){
           final items = widget.items[index];
-          return Dismissible( key:Key(index.toString()), child: CheckboxListTile(title:Text(items.title),activeColor: Colors.deepPurple[400] ,checkColor: Colors.white,value: items.done,onChanged: (value) {
+          return Dismissible( key:UniqueKey(), child: CheckboxListTile(title:Text(items.title),activeColor: Colors.deepPurple[400] ,checkColor: Colors.white,value: items.done,onChanged: (value) {
             setState(() {
               items.done = value;
             });
